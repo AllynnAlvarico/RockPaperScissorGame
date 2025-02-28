@@ -1,3 +1,4 @@
+
 // Libraries
 #include <stdio.h>
 #include <stdbool.h>
@@ -6,53 +7,76 @@
 #define SIZESTRING 7
 
 // Prototypes
-bool userWin(int, int);
+int gameCondition(int, int);
 char *movePick(int);
 
 // Declaration
 int rock = 1;
 int paper = 2;
 int scissor = 3;
-char move_rock[4] = "Rock";
-char move_paper[] = "Paper";
-char move_scissor[] = "Scissor";
+char move_rock[5] = "Rock";
+char move_paper[6] = "Paper";
+char move_scissor[8] = "Scissor";
 int user;
 int opponent = 1;
-char userPick[SIZESTRING];
-char compPick[SIZESTRING];
+bool play = false;
+char start = 'y';
 
 int main(){
-    
-    printf("Rock, Paper, Scissor Game \n");
-    printf("Pick your Move!\n");
-    printf("1 = Rock \n2 = Paper \n3 = Scissor\n");
-    scanf("%d", &user);
-    // r = (int)rand();
-    
-    printf("\nRock is -> %s", move_rock);
-    printf("\nPaper is -> %s", move_paper);
-    printf("\nScissor is -> %s\n", move_scissor);
 
-    if(userWin(user, opponent)){
-        printf("Winner!");
-    }else{
-        printf("Loser");
-    }
-    printf("\nUser move is %s and Comp move is %s", movePick(user), movePick(opponent));
+    play = true;
+
+    do{
+        printf("Rock, Paper, Scissor Game \n");
+        printf("Pick your Move!\n");
+        printf("1 = Rock \n2 = Paper \n3 = Scissor\n");
+        scanf("%d", &user);
+
+        switch (gameCondition(user, opponent))
+        {
+        case 1:
+            printf("Winner!");
+            break;
+        case 2:
+            printf("Draw");
+            break;
+        default:
+            printf("Loser");
+            break;
+        }
+        printf("\nUser move is %s and Comp move is %s", movePick(user), movePick(opponent));
+        getchar();
+
+        printf("\n\nPlay again?\n");
+        scanf("%c", &start);
+        getchar();
+
+        if(start == 'n'){
+            play = false;
+        }else if(start != 'n' || start != 'y') {
+            printf("Enter n for stop and y for play again\n");
+        }
+    }while(play);
+
+    
     return 0;
 }
 
-bool userWin(int userPick, int random){
-    if (userPick == rock && random == scissor) {
-        return true;
+int gameCondition(int userPick, int random){
+    if(userPick == random){
+       return 2;
+    } else {
+        if (userPick == rock && random == scissor) {
+            return 1;
+            }
+        else if (userPick == paper && random == rock) {
+            return 1;
+            }
+        else if (userPick == scissor && random == paper) {
+            return 1;
         }
-    else if (userPick == paper && random == rock) {
-        return true;
-        }
-    else if (userPick == scissor && random == paper) {
-        return true;
     }
-    return false;
+    return 0;
 }
 
 char *movePick(int pick){
