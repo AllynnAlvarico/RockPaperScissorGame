@@ -14,8 +14,8 @@ int rock = 1;
 int paper = 2;
 int scissor = 3;
 char move_rock[4] = "Rock";
-char move_paper[5] = "Paper";
-char move_scissor[7] = "Scissor";
+char move_paper[] = "Paper";
+char move_scissor[] = "Scissor";
 int user;
 int opponent = 1;
 char userPick[SIZESTRING];
@@ -25,7 +25,7 @@ int main(){
     
     printf("Rock, Paper, Scissor Game \n");
     printf("Pick your Move!\n");
-    printf("1 = Rock \n 2 = Paper \n 3 = Scissor\n");
+    printf("1 = Rock \n2 = Paper \n3 = Scissor\n");
     scanf("%d", &user);
     // r = (int)rand();
     
@@ -60,15 +60,11 @@ char *movePick(int pick){
     {
     case 1:
         return move_rock;
-        break;
     case 2:
         return move_paper;
-        break;
     case 3:
         return move_scissor;
-        break;
     default:
         return NULL;
-        break;
     }
 }
