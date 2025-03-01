@@ -34,7 +34,8 @@ int main(){
 
     do{
         printf("Rock, Paper, Scissor Game \n");
-        printf("Pick your Move!\n");
+        printf("Player Score: %d Computer Score: %d\n", playerScore, computerScore);
+        printf("\nPick your Move!\n");
         printf("1 = Rock \n2 = Paper \n3 = Scissor\n");
 
         scanf("%d", &user);
@@ -43,12 +44,14 @@ int main(){
         {
         case 1:
             printf("Winner!");
+            playerScore++;
             break;
         case 2:
             printf("Draw");
             break;
         default:
             printf("Loser");
+            computerScore++;
             break;
         }
         printf("\nUser move is %s and Comp move is %s", movePick(user), movePick(opponent));
@@ -72,15 +75,12 @@ int gameCondition(int userPick, int random){
        return 2;
     } else {
         if (userPick == rock && random == scissor) {
-            playerScore++;
             return 1;
             }
         else if (userPick == paper && random == rock) {
-            playerScore++;
             return 1;
             }
         else if (userPick == scissor && random == paper) {
-            playerScore++;
             return 1;
         }
     }
